@@ -1,0 +1,83 @@
+html{
+    body {
+        font-family: $font;
+        background-color: $background;
+        margin: 0;
+        padding: 0;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 24px;
+        line-height: 29px;
+        box-sizing: border-box;
+
+        .app-inner {
+            margin: 14vmin 10vmin;
+            display: flex;
+            height: 40vmin;
+            
+            div {
+                flex: 1;
+            }
+
+            .major{
+                flex: 2;
+                text-align: center;
+                color: $secondary_color;
+                img{
+                    height: 30vmin;
+                }
+                div{
+                    margin-block-start: 23px;
+                    input {
+                        color: white;
+                        font-size: $bigger_font_size;
+                        line-height: 44px;
+                        padding: 12px;
+                        background-color: transparent;
+                        border: 4px solid $grid_color;
+                        outline: none;
+                        width: 161px;
+                    }
+                }
+                .settings{
+                    text-align: center;
+                    font-size: $bigger_font_size;
+                    color: $grid_color;
+                    margin-top: 80px;
+
+                    div {
+                        display: inline-block;
+                        margin: 0 10px;
+                    }
+                }
+                .game-name {
+                    color: $primary_color;
+                    font-size: 64px;
+                    line-height: 77px;
+                    font-weight: 600;
+                    margin-block-start: 30px;
+                    margin-block-end: 0;
+                }
+                .activate{
+                    margin-top: 90px;
+                    button {
+                        padding: 24.5px 78.5px;
+                        border-radius: 10px;
+                        background-color: $button_background;
+                        border: none;
+                        font-weight: 500;
+                        font-size: 30px;
+                        line-height: 36.31px;
+                        color: #FCFCFC;
+                        cursor: pointer;
+                        pointer-events: visiblePainted;
+                    }
+                }
+            }
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
