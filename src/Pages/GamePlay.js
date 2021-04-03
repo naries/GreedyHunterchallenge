@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import Grid from "../component/Grid"
 import LifeRemaining from "../component/LifeRemaining"
+import Time from "../component/Time"
 
 const FoodgenerateRandom = (max, playerStartPosition) => {
     const gen =  Math.floor(Math.random() * max) + 1
@@ -45,7 +46,7 @@ const GamePlay = () => {
             setFoodArray([...foodArray].filter(a => a !== playerHole))
         }
         if(arg === 'left') {
-            if(playerHole > 0){
+            if(playerHole > 1){
                 setPlayerHole(playerHole - 1)
             }
         } else if (arg === 'right') {
@@ -53,7 +54,7 @@ const GamePlay = () => {
                 setPlayerHole(playerHole + 1)
             }
         } else if (arg === 'down') {
-            if(playerHole < grid * grid){
+            if(playerHole < grid * grid - grid){
                 setPlayerHole(playerHole + grid)
             }
         } else if (arg === 'up') {
@@ -73,9 +74,9 @@ const GamePlay = () => {
         <div className="game-play-inner">
             <div className="container">
                 <div className="header">
-                    <div>Grid: 10 x 10</div>
+                    <div>Grid: {grid} x {grid}</div>
                     <div className="life-cover"><LifeRemaining life={playerMoves/totalMoves}/></div>
-                    <div>Time spent: <b>00:48 secs</b></div>
+                    <div>Time spent: <b><Time /> secs</b></div>
                 </div>
                 <div className="middle-container">
                     <Grid grid={grid} playerHole={playerHole} _setPlayerHole={_setPlayerHole} foodArray={foodArray}/>

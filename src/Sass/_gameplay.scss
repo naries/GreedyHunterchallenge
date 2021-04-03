@@ -54,8 +54,8 @@
             padding-right: 4em;
             .life-cover{
                 text-align: center;
-                position: relative;
                 .life-remaining{
+                    position: relative;
                     width: 120px;
                     height: 18px;
                     display: inline-block;
@@ -72,7 +72,7 @@
                     .hanging-heart{
                         position: absolute;
                         left: -20%;
-                        top: -40%;
+                        top: -50%;
                         img{
                             width: 50.44px;
                             height: 43.83px;

@@ -1,3 +1,8 @@
+import logo from '../assets/vectors/character.svg'
+import food from '../assets/vectors/food.svg'
+
+
+
 const buildArray = (grid) => {
     let newArray = []
     for(let i = 0; i < (grid*grid); i++) {
@@ -7,7 +12,6 @@ const buildArray = (grid) => {
 }
 
 const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
-    // console.log(foodArray)
     const squares = buildArray(grid)
     const navigatable = [playerHole, playerHole-2, playerHole+grid-1, playerHole-grid-1]
     const navigate = e => {
@@ -31,14 +35,20 @@ const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
         <>
         <div className="grid" tabIndex={0} onKeyDown={e => navigate(e)}> 
             {squares.map((square, i) => {return <>
-                {navigatable.includes(square) && <div key={i} className="box paint">
-                    {playerHole === square + 1 && <div style={{padding: 10}}>player</div>}
-                    {foodArray.includes(square + 1) && <div style={{padding: 10}}>Food</div>}
+                {navigatable.includes(square) && <div key={i} className="box">
+                    {playerHole === square + 1 && <div className="holder">
+                        <img src={logo} alt="player"/>
+                    </div> || foodArray.includes(square + 1) && <div className="holder">
+                        <img src={food} alt="player"/>
+                    </div>}
                 </div>}
 
                 {!navigatable.includes(square) && <div key={i} className="box">
-                    {playerHole === square + 1 && <div style={{padding: 10}}>player</div>}
-                    {foodArray.includes(square +    1) && <div style={{padding: 10}}>Food</div>}
+                    {playerHole === square + 1 && <div className="holder" className="holder">
+                        <img src={logo} alt="player"/>
+                    </div> || foodArray.includes(square + 1) && <div className="holder">
+                        <img src={food} alt="player"/>
+                    </div>}
                 </div>}
             </>})}
         </div>

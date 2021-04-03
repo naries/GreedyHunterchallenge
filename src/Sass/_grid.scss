@@ -1,4 +1,19 @@
 .paint {
-    background-color: pink;
+    // background-color: pink;
     cursor: pointer!important;    
+}
+.strong {
+    border-width: 2px;
+}
+
+.grid {
+    .holder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+    }
+    img {
+        width: 50%;
+    }
 }
