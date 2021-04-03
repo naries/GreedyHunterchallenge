@@ -3,7 +3,7 @@ import Reusable from "../component/Reusable"
 const GameLost = () => {
     return (
         <>
-        <Reusable type="lost" />
+            <Reusable type="lost" />
         </>
     );
 }
