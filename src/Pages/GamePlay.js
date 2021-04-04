@@ -61,7 +61,7 @@ const GamePlay = () => {
                 setPlayerHole(playerHole + 1)
             }
         } else if (arg === 'down') {
-            if(playerHole < grid * grid - grid){
+            if(playerHole < grid * grid - grid + 1){
                 setPlayerHole(parseInt(parseInt(playerHole) + grid))
             }
         } else if (arg === 'up') {

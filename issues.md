@@ -1,0 +1,2 @@
+- Navigation: avatar hangs( on second-to-last row last column intersection) when down is presed.
+- Food ate: The number of food eaten is static.
