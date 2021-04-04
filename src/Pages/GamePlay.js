@@ -70,9 +70,7 @@ const GamePlay = () => {
         }
 
         setPlayerMoves(playerMoves + 1)
-        if(foodArray.includes(playerHole)) {
-            setFoodArray([...foodArray].filter(a => a !== playerHole))
-        }
+        
     }
 
     useEffect(() => {
@@ -80,11 +78,17 @@ const GamePlay = () => {
         setFoodArray(buildFoodArray(grid, neverChange.current))
     },[])
 
+    useEffect(() => {
+        if(foodArray.includes(playerHole)) {
+            setFoodArray([...foodArray].filter(a => a !== playerHole))
+        }
+    },[playerMoves])
+
     return (
-        <div className="pageSlider">
-        {playerMoves === totalMoves && foodArray.length !== 0 && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds`, food_consumed: grid - foodArray.length, grid: grid }}} />}
+        <>
+        {(playerMoves === totalMoves && foodArray.length !== 0 ) && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds`, food_consumed: grid - foodArray.length, grid: grid }}} />}
         {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds`}}}/>}
-        <div className="game-play-inner">
+        <div className="game-play-inner pageSlider">
             <div className="container">
                 <div className="header">
                     <div>Grid: {grid} x {grid}</div>
@@ -100,7 +104,7 @@ const GamePlay = () => {
                 </div>
             </div>
         </div>
-        </div>
+        </>
     );
 }
 

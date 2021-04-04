@@ -1,6 +1,8 @@
 .paint {
-    // background-color: pink;
     cursor: pointer!important;    
+}
+.paint:hover{
+    background-color: rgb(255, 235, 238);
 }
 .strong {
     border-width: 2px;

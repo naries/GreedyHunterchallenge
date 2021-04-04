@@ -1,0 +1,12 @@
+// The mdia mixin
+@mixin media($args...) {
+    $query: "";
+    @each $arg in $args {
+      $op: "";
+      @if ( $query != "" ) {
+        $op: " and ";
+      }
+      $query: $query + $op + translate-media-condition($arg);
+    }
+    @media #{$query}  { @content; }
+}

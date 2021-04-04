@@ -15,8 +15,24 @@ const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
     const gridRef = useRef();
 
     const navigatable = [playerHole, playerHole-2, playerHole+grid-1, playerHole-grid-1]
-    const navigate = e => {
-        switch(e.which) {
+    
+    const keyboardNavigation = (e) =>{
+        navigate(e.which)
+    }
+
+    const mouseNavigation = (e, square) => {
+        /**
+         * 37 for left
+         * 38 for up
+         * 39 for right
+         * 40 for down
+         */
+        const which = square === playerHole + 1 ? 39: square === playerHole + grid ? 40 : square===playerHole - 1 ? 37: 38;
+        navigate(which)
+    }
+
+    const navigate = which => {
+        switch(which) {
             case 37:
                 _setPlayerHole('left')
                 break;
@@ -31,23 +47,29 @@ const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
                 break;
         }
     }
+
     useEffect(() => {
         gridRef.current.focus();
     })
 
     return (
         <>
-        <div id="grid" className="grid" tabIndex={0} ref={gridRef} onKeyDown={e => navigate(e)} style={{gridTemplateColumns: `repeat(${grid}, ${500/grid}px)`, gridTemplateRows: `repeat(${grid}, ${500/grid}px)`}}> 
+        <div id="grid" 
+            className="grid" 
+            tabIndex={0} 
+            ref={gridRef} 
+            onKeyDown={e => keyboardNavigation(e)} 
+            style={{gridTemplateColumns: `repeat(${grid}, calc(100%/${grid}))`, gridTemplateRows: `repeat(${grid}, calc(500px/${grid}))`}}> 
             {squares.map((square, i) => {return <>
-                {navigatable.includes(square) && <div key={i} className="box">
-                    {playerHole === square + 1 && <div className="holder">
+                {navigatable.includes(square) && <div key={i} className="box paint" onClick={(e) => mouseNavigation(e, square + 1)}>
+                    {playerHole === square + 1 && <div className="holder" >
                         <img src={logo} alt="player"/>
                     </div> || foodArray.includes(square + 1) && <div className="holder">
                         <img src={food} alt="player"/>
                     </div>}
                 </div>}
 
-                {!navigatable.includes(square) && <div key={i} className="box">
+                {!navigatable.includes(square) && <div key={i} className="box" >
                     {playerHole === square + 1 && <div className="holder" className="holder">
                         <img src={logo} alt="player"/>
                     </div> || foodArray.includes(square + 1) && <div className="holder">

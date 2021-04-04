@@ -12,8 +12,8 @@ const Reusable = props => {
     
     const [grid, setGrid] = useState(5);
     return (<>
-          <div className="app-inner">
-        <div>
+      <div className="app-inner">
+        <div className="holes">
           <img src={holes} alt = "holes design" />
         </div>
 
@@ -36,7 +36,7 @@ const Reusable = props => {
           </div>
         </div>
 
-        <div>
+        <div className="holes">
           <img src={holes} alt = "holes design" />
         </div>
       </div>
