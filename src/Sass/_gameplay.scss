@@ -1,0 +1,83 @@
+.game-play-inner {
+    width: 100%;
+    height: 100vmin;
+    background-image: url('../assets/vectors/background-game-play.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: roboto;
+    font-size: 15.7px;
+    color: $gameplay_color;
+    line-height: 18px;
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: space-between;
+        background-color: #ffffff;
+        padding: 10px;
+        height: 80vmin;
+        width: 40em;
+        border-radius: 17.5186px;
+        .middle-container {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            .grid{
+                border:1px solid #853594;
+                width: 500px;
+                display: grid;
+                grid-gap: 0;
+                .box{
+                    border: 1px solid #853594;
+                    width: 100%;
+                    height: 100%;
+                    margin-block-end: 0;
+                    margin-block-start: 0;
+                    line-height:0;
+                    cursor: not-allowed;
+                }
+            }
+        }
+        
+        .header, .footer {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 4em;
+            padding-right: 4em;
+            .life-cover{
+                text-align: center;
+                .life-remaining{
+                    position: relative;
+                    width: 120px;
+                    height: 18px;
+                    display: inline-block;
+                    border-radius: 12px;
+                    background-image: linear-gradient(180deg, #853594 47.39%, #692789 47.4%);
+                    border: 2.15px solid #532461;
+                    .life{
+                        width: 90px;
+                        background-image: linear-gradient(180deg, #F07CC3 44.27%, #C5418E 44.28%);
+                        height: 16px;
+                        border-radius: 10px;
+                        border: 1px solid #FFFFFD;
+                    }
+                    .hanging-heart{
+                        position: absolute;
+                        left: -20%;
+                        top: -50%;
+                        img{
+                            width: 50.44px;
+                            height: 43.83px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
