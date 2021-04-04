@@ -31,8 +31,6 @@
                 width: 500px;
                 display: grid;
                 grid-gap: 0;
-                grid-template-columns: repeat(5, 100px);
-                grid-template-rows: repeat(5, 100px);
                 .box{
                     border: 1px solid #853594;
                     width: 100%;

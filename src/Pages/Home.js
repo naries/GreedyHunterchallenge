@@ -1,7 +1,9 @@
 import Reusable from "../component/Reusable";
 
 const Home = () => {
-    return <Reusable />;
+    return <div className="pageSlider">
+        <Reusable />
+    </div>
 }
 
 export default Home;

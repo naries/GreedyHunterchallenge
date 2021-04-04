@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 
-const Time = () => {
+const Time = props => {
+    const { setExhaustedTime } = props 
     const [timer, setTimer] = useState(0)
     const time = useRef()
 
-    setTimeout(() => setTimer(timer + 1), 1000)
+    setTimeout(() => {setTimer(timer + 1); setExhaustedTime(time.current)}, 1000)
 
     useEffect(() => {
         const formatTime = (time) => {

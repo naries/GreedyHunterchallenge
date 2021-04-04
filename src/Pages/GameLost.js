@@ -1,9 +1,9 @@
 import Reusable from "../component/Reusable"
 
-const GameLost = () => {
+const GameLost = props => {
     return (
         <>
-            <Reusable type="lost" />
+            <Reusable type="lost" {...props} />
         </>
     );
 }

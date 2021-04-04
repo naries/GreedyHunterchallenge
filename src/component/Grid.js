@@ -1,7 +1,6 @@
+import { useEffect, useRef } from 'react';
 import logo from '../assets/vectors/character.svg'
 import food from '../assets/vectors/food.svg'
-
-
 
 const buildArray = (grid) => {
     let newArray = []
@@ -13,6 +12,8 @@ const buildArray = (grid) => {
 
 const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
     const squares = buildArray(grid)
+    const gridRef = useRef();
+
     const navigatable = [playerHole, playerHole-2, playerHole+grid-1, playerHole-grid-1]
     const navigate = e => {
         switch(e.which) {
@@ -30,10 +31,13 @@ const Grid = ({grid, playerHole, _setPlayerHole, foodArray}) => {
                 break;
         }
     }
+    useEffect(() => {
+        gridRef.current.focus();
+    })
 
     return (
         <>
-        <div className="grid" tabIndex={0} onKeyDown={e => navigate(e)}> 
+        <div id="grid" className="grid" tabIndex={0} ref={gridRef} onKeyDown={e => navigate(e)} style={{gridTemplateColumns: `repeat(${grid}, ${500/grid}px)`, gridTemplateRows: `repeat(${grid}, ${500/grid}px)`}}> 
             {squares.map((square, i) => {return <>
                 {navigatable.includes(square) && <div key={i} className="box">
                     {playerHole === square + 1 && <div className="holder">

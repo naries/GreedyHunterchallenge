@@ -1,8 +1,10 @@
 import Reusable from '../component/Reusable'
 
-const GameWon = () => {
+const GameWon = props => {
     return (
-        <Reusable type="won"/>
+        <div className="pageSlider">
+            <Reusable type="won" {...props}/>
+        </div>
     );
 }
 

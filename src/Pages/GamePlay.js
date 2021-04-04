@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react"
+import { Redirect, useParams } from "react-router-dom"
 import Grid from "../component/Grid"
 import LifeRemaining from "../component/LifeRemaining"
 import Time from "../component/Time"
+
 
 const FoodgenerateRandom = (max, playerStartPosition) => {
     const gen =  Math.floor(Math.random() * max) + 1
@@ -29,22 +31,27 @@ const buildFoodArray = (grid, constant) => {
 }
 
 const GamePlay = () => {
-    const grid = 5
+    let {grid} = useParams()
+
+    // make sure the grid returned is an interger
+    grid = parseInt(grid)
+
+    //defining and initializing states
     const [playerHole, setPlayerHole] = useState(0)
     const [playerMoves, setPlayerMoves] = useState(0)
+    const [exhaustedTime, setExhaustedTime] = useState(``)
+
     const totalMoves = Math.floor((grid * grid) / 2)
+    
+
     let neverChange = useRef();
     neverChange.current = playerHole;
 
     // an array that sets the position of each food grid
     const [foodArray, setFoodArray] = useState([])
-
     // to navigate 
     const _setPlayerHole = (arg) => {
-        setPlayerMoves(playerMoves + 1)
-        if(foodArray.includes(playerHole)) {
-            setFoodArray([...foodArray].filter(a => a !== playerHole))
-        }
+
         if(arg === 'left') {
             if(playerHole > 1){
                 setPlayerHole(playerHole - 1)
@@ -55,12 +62,17 @@ const GamePlay = () => {
             }
         } else if (arg === 'down') {
             if(playerHole < grid * grid - grid){
-                setPlayerHole(playerHole + grid)
+                setPlayerHole(parseInt(parseInt(playerHole) + grid))
             }
         } else if (arg === 'up') {
             if(playerHole > grid) {
                 setPlayerHole(playerHole - grid)
             }
+        }
+
+        setPlayerMoves(playerMoves + 1)
+        if(foodArray.includes(playerHole)) {
+            setFoodArray([...foodArray].filter(a => a !== playerHole))
         }
     }
 
@@ -70,16 +82,18 @@ const GamePlay = () => {
     },[])
 
     return (
-        <>
+        <div className="pageSlider">
+        {playerMoves === totalMoves && foodArray.length !== 0 && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds` }}} />}
+        {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds` }}}/>}
         <div className="game-play-inner">
             <div className="container">
                 <div className="header">
                     <div>Grid: {grid} x {grid}</div>
                     <div className="life-cover"><LifeRemaining life={playerMoves/totalMoves}/></div>
-                    <div>Time spent: <b><Time /> secs</b></div>
+                    <div>Time spent: <b><Time setExhaustedTime={setExhaustedTime} /> secs</b></div>
                 </div>
                 <div className="middle-container">
-                    <Grid grid={grid} playerHole={playerHole} _setPlayerHole={_setPlayerHole} foodArray={foodArray}/>
+                    <Grid grid={grid} playerHole={playerHole} _setPlayerHole={_setPlayerHole} foodArray={foodArray} />
                 </div>
                 <div className="header">
                     <div className="gameplay-text">Maximum moves: <b>{totalMoves}</b></div>
@@ -87,7 +101,7 @@ const GamePlay = () => {
                 </div>
             </div>
         </div>
-        </>
+        </div>
     );
 }
 
