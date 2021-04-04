@@ -31,7 +31,7 @@ const buildFoodArray = (grid, constant) => {
 }
 
 const GamePlay = () => {
-    let {grid} = useParams()
+    let { grid } = useParams()
 
     // make sure the grid returned is an interger
     grid = parseInt(grid)
@@ -42,7 +42,6 @@ const GamePlay = () => {
     const [exhaustedTime, setExhaustedTime] = useState(``)
 
     const totalMoves = Math.floor((grid * grid) / 2)
-    
 
     let neverChange = useRef();
     neverChange.current = playerHole;
@@ -83,8 +82,8 @@ const GamePlay = () => {
 
     return (
         <div className="pageSlider">
-        {playerMoves === totalMoves && foodArray.length !== 0 && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds` }}} />}
-        {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds` }}}/>}
+        {playerMoves === totalMoves && foodArray.length !== 0 && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds`, food_consumed: grid - foodArray.length, grid: grid }}} />}
+        {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds`}}}/>}
         <div className="game-play-inner">
             <div className="container">
                 <div className="header">

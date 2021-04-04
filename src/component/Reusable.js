@@ -6,6 +6,10 @@ import { useState } from 'react';
 const Reusable = props => {
     const { type } = props
     const exhausted_time = props.location ? props.location.state.exhausted_time: null;
+    const food_consumed = props.location && props.location.state.food_consumed ? props.location.state.food_consumed: null
+    const lastgrid = props.location && props.location.state.grid ? props.location.state.grid: null
+
+    
     const [grid, setGrid] = useState(5);
     return (<>
           <div className="app-inner">
@@ -17,7 +21,7 @@ const Reusable = props => {
           <img src={logo} alt="logo" />
           <div className="game-name">{type? type==="won" ?`Bravo!`: `Game over!`: `Greedy hunter`}</div>
           {!type && <div className="game-info">The aim is to eat all the food in record time</div>}
-          {type && type==="lost" && <div className="game-info">Total Food: <b>7/10</b></div>}
+          {type && type==="lost" && <div className="game-info">Total Food: <b>{food_consumed}/{lastgrid}</b></div>}
           {type && <div className="game-info">Time Spent: <b>{exhausted_time}</b></div>}
 
           {!type && <div className="game-info">Configure your game grid below 👇🏼</div>}
