@@ -31,7 +31,7 @@ const buildFoodArray = (grid, constant) => {
 }
 
 const GamePlay = () => {
-    let {grid} = useParams()
+    let { grid } = useParams()
 
     // make sure the grid returned is an interger
     grid = parseInt(grid)
@@ -42,7 +42,6 @@ const GamePlay = () => {
     const [exhaustedTime, setExhaustedTime] = useState(``)
 
     const totalMoves = Math.floor((grid * grid) / 2)
-    
 
     let neverChange = useRef();
     neverChange.current = playerHole;
@@ -61,7 +60,7 @@ const GamePlay = () => {
                 setPlayerHole(playerHole + 1)
             }
         } else if (arg === 'down') {
-            if(playerHole < grid * grid - grid){
+            if(playerHole < grid * grid - grid + 1){
                 setPlayerHole(parseInt(parseInt(playerHole) + grid))
             }
         } else if (arg === 'up') {
@@ -71,9 +70,7 @@ const GamePlay = () => {
         }
 
         setPlayerMoves(playerMoves + 1)
-        if(foodArray.includes(playerHole)) {
-            setFoodArray([...foodArray].filter(a => a !== playerHole))
-        }
+        
     }
 
     useEffect(() => {
@@ -81,11 +78,17 @@ const GamePlay = () => {
         setFoodArray(buildFoodArray(grid, neverChange.current))
     },[])
 
+    useEffect(() => {
+        if(foodArray.includes(playerHole)) {
+            setFoodArray([...foodArray].filter(a => a !== playerHole))
+        }
+    },[playerMoves])
+
     return (
-        <div className="pageSlider">
-        {playerMoves === totalMoves && foodArray.length !== 0 && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds` }}} />}
-        {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds` }}}/>}
-        <div className="game-play-inner">
+        <>
+        {(playerMoves === totalMoves && foodArray.length !== 0 ) && <Redirect to ={{pathname: "/lost", state: { exhausted_time: `${exhaustedTime} seconds`, food_consumed: grid - foodArray.length, grid: grid }}} />}
+        {playerMoves !== 0 && foodArray.length === 0 && <Redirect to ={{pathname: "/won", state:{ exhausted_time: `${exhaustedTime} seconds`}}}/>}
+        <div className="game-play-inner pageSlider">
             <div className="container">
                 <div className="header">
                     <div>Grid: {grid} x {grid}</div>
@@ -101,7 +104,7 @@ const GamePlay = () => {
                 </div>
             </div>
         </div>
-        </div>
+        </>
     );
 }
 

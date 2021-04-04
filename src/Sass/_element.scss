@@ -23,6 +23,12 @@ html{
                 flex: 1;
             }
 
+            .holes {
+                @include media("screen", "<minWidth") {
+                    display: none;
+                }
+            }
+
             .major{
                 flex: 2;
                 text-align: center;
@@ -41,29 +47,52 @@ html{
                         border: 4px solid $grid_color;
                         outline: none;
                         width: 161px;
+                        @include media("screen", "<minWidth") {
+                            font-size: 24px;
+                            padding: 6px;
+                            width: 10vw;
+                        }
                     }
                 }
                 .settings{
                     text-align: center;
                     font-size: $bigger_font_size;
                     color: $grid_color;
-                    margin-top: 80px;
+                    margin-top: 60px;
 
                     div {
                         display: inline-block;
                         margin: 0 10px;
                     }
+
+                    @include media("screen", "<minWidth") {
+                        font-size: 24px;
+                        margin-top: 10px;
+                    }
                 }
                 .game-name {
                     color: $primary_color;
-                    font-size: 64px;
+                    font-size: 5vw;
                     line-height: 77px;
                     font-weight: 600;
-                    margin-block-start: 30px;
+                    margin-block-start: 3%;
                     margin-block-end: 0;
+                    @include media("screen", "<minWidth") {
+                        font-size: 24px;
+                        line-height: 32px;
+                    }
+                }
+                .game-info {
+                    @include media("screen", "<minWidth") {
+                        font-size: 18px;
+                        line-height: 24px;
+                    }
                 }
                 .activate{
-                    margin-top: 90px;
+                    margin-top: 60px;
+                    @include media("screen", "<minWidth") {
+                        margin-top: 20px;
+                    }
                     button {
                         padding: 24.5px 78.5px;
                         border-radius: 10px;
@@ -75,6 +104,10 @@ html{
                         color: #FCFCFC;
                         cursor: pointer;
                         pointer-events: visiblePainted;
+                        @include media("screen", "<minWidth") {
+                            font-size: 18px;
+                            padding: 10px;
+                        }
                     }
                 }
             }
